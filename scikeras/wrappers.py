@@ -436,7 +436,10 @@ class BaseWrapper(BaseEstimator):
     def _get_tags(self):
         # Patch for scikit-learn 1.6.x compatibility
         return {}
-
+    def __sklearn_tags__(self):
+        # Patch for scikit-learn 1.6.x compatibility
+        return self._get_tags()
+        
     def _ensure_compiled_model(self) -> None:
         # compile model if user gave us an un-compiled model
         if not self.model_.compiled:
