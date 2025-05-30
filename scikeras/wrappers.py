@@ -435,16 +435,18 @@ class BaseWrapper(BaseEstimator):
 
         return model
     
-
+ 
+    
     def _get_tags(self):
-        return Bunch({
-            "estimator_type": "regressor",
-            "requires_y": True,
-            "non_deterministic": True,
-            "requires_fit": True,
-            "poor_score": False,
-            "X_types": ["2darray"],
-        })
+        return Bunch(
+            estimator_type="regressor",
+            requires_y=True,
+            non_deterministic=True,
+            requires_fit=True,
+            poor_score=False,
+            X_types=["2darray"]
+        )
+
     def __sklearn_tags__(self):
         return self._get_tags()
         
