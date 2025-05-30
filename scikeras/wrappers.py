@@ -436,7 +436,7 @@ class BaseWrapper(BaseEstimator):
         return model
     
 
-   def _get_tags(self):
+    def _get_tags(self):
         return Bunch({
             "estimator_type": "regressor",
             "requires_y": True,
@@ -445,10 +445,8 @@ class BaseWrapper(BaseEstimator):
             "poor_score": False,
             "X_types": ["2darray"],
         })
-
     def __sklearn_tags__(self):
         return self._get_tags()
- 
         
     def _ensure_compiled_model(self) -> None:
         # compile model if user gave us an un-compiled model
