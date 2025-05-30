@@ -433,9 +433,9 @@ class BaseWrapper(BaseEstimator):
             model = final_build_fn(**build_params)
 
         return model
-        def _get_tags(self):
+    def _get_tags(self):
         # Patch for scikit-learn 1.6.x compatibility
-            return {}
+        return {}
 
     def _ensure_compiled_model(self) -> None:
         # compile model if user gave us an un-compiled model
