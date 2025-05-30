@@ -19,6 +19,7 @@ from sklearn.preprocessing import FunctionTransformer
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.utils.multiclass import type_of_target
 from sklearn.utils.validation import _check_sample_weight, check_array, check_X_y
+from sklearn.utils._tags import _DEFAULT_TAGS
 
 from scikeras._utils import (
     accepts_kwargs,
@@ -433,12 +434,18 @@ class BaseWrapper(BaseEstimator):
             model = final_build_fn(**build_params)
 
         return model
+    
+
     def _get_tags(self):
-        # Patch for scikit-learn 1.6.x compatibility
-        return {}
+        # Start with sklearn's default tags and override as needed
+        tags = _DEFAULT_TAGS.copy()
+        tags["estimator_type"] = "regressor"
+        tags["requires_y"] = True
+        return tags
+
     def __sklearn_tags__(self):
-        # Patch for scikit-learn 1.6.x compatibility
         return self._get_tags()
+
         
     def _ensure_compiled_model(self) -> None:
         # compile model if user gave us an un-compiled model
