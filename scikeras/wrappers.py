@@ -437,6 +437,7 @@ class BaseWrapper(BaseEstimator):
     
  
     
+
     def _get_tags(self):
         return Bunch(
             estimator_type="regressor",
@@ -444,12 +445,13 @@ class BaseWrapper(BaseEstimator):
             non_deterministic=True,
             requires_fit=True,
             poor_score=False,
-            X_types=["2darray"]
+            X_types=["2darray"],
+            input_tags=Bunch(pairwise=False)  # ✅ this line fixes the crash
         )
 
     def __sklearn_tags__(self):
         return self._get_tags()
-        
+     
     def _ensure_compiled_model(self) -> None:
         # compile model if user gave us an un-compiled model
         if not self.model_.compiled:
